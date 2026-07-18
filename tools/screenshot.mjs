@@ -13,15 +13,16 @@ import { join } from "node:path";
 
 const url = process.argv[2] ?? "http://localhost:5199/";
 const out = process.argv[3] ?? "shot.png";
-const EDGE = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe";
+// Chrome : le CDP d'Edge est bloqué sur cette machine (stratégie d'entreprise ?).
+const BROWSER = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const PORT = 9333;
 
-const edge = spawn(
-  EDGE,
+const browser = spawn(
+  BROWSER,
   [
     "--headless=new",
     `--remote-debugging-port=${PORT}`,
-    `--user-data-dir=${join(tmpdir(), "wallonia-edge-cdp")}`,
+    `--user-data-dir=${join(tmpdir(), "wallonia-cdp")}`,
     "--no-first-run",
     "--disable-gpu",
     "--enable-unsafe-swiftshader",
@@ -98,7 +99,7 @@ try {
   console.log(`OK -> ${out}`);
 } finally {
   try {
-    execSync(`taskkill /PID ${edge.pid} /T /F`, { stdio: "ignore" });
+    execSync(`taskkill /PID ${browser.pid} /T /F`, { stdio: "ignore" });
   } catch {
     /* déjà mort */
   }
