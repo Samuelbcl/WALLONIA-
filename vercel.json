@@ -1,0 +1,3 @@
+{
+  "buildCommand": "node tools/make_synthetic_tiles.mjs && npm run build"
+}

@@ -35,7 +35,8 @@ async function resolveGrid(): Promise<TileGrid | null> {
   const requested = new URLSearchParams(location.search).get("aoi") ?? "home";
   try {
     return await loadTileGrid(requested);
-  } catch {
+  } catch (err) {
+    console.error(`AOI « ${requested} » : /tiles/${requested}/index.json illisible`, err);
     if (requested !== "synthetic") {
       try {
         const grid = await loadTileGrid("synthetic");
@@ -43,8 +44,8 @@ async function resolveGrid(): Promise<TileGrid | null> {
           "Données SPW absentes — relief SYNTHÉTIQUE de test. " +
           "Lancer le pipeline (docs/DATA-PIPELINE.md) puis recharger.";
         return grid;
-      } catch {
-        /* rien en dessous non plus */
+      } catch (errSynth) {
+        console.error("AOI « synthetic » : /tiles/synthetic/index.json illisible", errSynth);
       }
     }
     notice.textContent =
