@@ -1,0 +1,14 @@
+{
+  "home": {
+    "lat": 50.5665,
+    "lon": 5.6250,
+    "sizeM": 16000,
+    "note": "Beaufays. Couvre Liege, l'Ourthe, Esneux, Sprimont, La Redoute."
+  },
+  "east": {
+    "lat": 50.5300,
+    "lon": 5.9000,
+    "sizeM": 64000,
+    "note": "Liege -> Hautes Fagnes -> Signal de Botrange (694m). NE PAS generer avant M2."
+  }
+}
